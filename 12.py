@@ -12,16 +12,23 @@ with open(filename) as file:
         k, v = line.rstrip().split('-')
         caves[k].append(v)
 
-pathes = [[]]
+pathes = []
 
 def find_next_cave(cave):
-    for c1 in range(len(caves[cave])):
-        for path in pathes:
+    end = True
+    for path in pathes:
+        for c1 in range(len(caves[cave])):
             # return a path not in the list
-            if not cave in path and not caves[cave][c1] in path:
-                return c1
+            cave_temp = caves[cave][c1]
+            if not cave in path or not caves[cave][c1] in path:
+                temp = c1
+            else:
+                end = False
 
-
+    else:
+        return 0
+    if(end):
+        return temp
 flag = True
 while(flag):
     path = []
